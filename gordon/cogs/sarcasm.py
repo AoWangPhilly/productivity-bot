@@ -15,7 +15,7 @@ class Sarcasm(commands.Cog):
         self.bot = bot
 
     def _open_pickle(self, fname):
-        pickle_path = join(dirname, 'db', fname+'.pkl')
+        pickle_path = join('db', fname+'.pkl')
         with open(pickle_path, 'rb') as f:
             pickle_lst = pickle.load(f)
         return pickle_lst

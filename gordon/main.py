@@ -17,7 +17,7 @@ logger.addHandler(handler)
 # -------------------------------------------------------------
 
 # -------------------- SECRET KEY -----------------------------
-with open(dirname + 'secret_key', 'r') as f:
+with open('secret_key', 'r') as f:
     SECRET_KEY = f.read()
 # -------------------------------------------------------------
 
