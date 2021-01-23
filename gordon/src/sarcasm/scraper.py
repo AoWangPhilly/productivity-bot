@@ -112,7 +112,7 @@ def save_as_pickle(lst: List[str], fname: str) -> None:
     fname: the filename of the pickle file
     fname: str
     '''
-    fname = join('..', '..', 'db', 'img', fname+'.pkl')
+    fname = join('..', '..', 'img', fname+'.pkl')
     with open(fname, 'wb') as f:
         pickle.dump(lst, f)
 
@@ -122,7 +122,7 @@ if __name__ == '__main__':
     # save_as_pickle(scrape_memes(), 'Memes')
     # save_as_pickle(call_giphy_gifs(), 'GIFs')
     # save_as_pickle(scrape_quotes(), 'Quotes')
-    base_img_path = join('..', '..', 'db', 'img')
+    base_img_path = join('..', '..', 'img')
     meme = join(base_img_path, 'Memes.pkl')
     gif = join(base_img_path, 'GIFs.pkl')
     quote = join(base_img_path, 'Quotes.pkl')
