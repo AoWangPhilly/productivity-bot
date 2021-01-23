@@ -33,3 +33,6 @@ await ctx.send(f"{ctx.author.mention}, Countdown Over!")
 
 except ValueError:
 await ctx.send("Enter a number.")
+
+def setup(bot):
+    bot.add_cog(Timer(bot))
