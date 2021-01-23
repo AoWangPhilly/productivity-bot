@@ -4,7 +4,7 @@ from cogs.sarcasm import Sarcasm
 
 import logging
 import os
-from pathlib import Path
+dirname = os.path.dirname(__file__)
 
 # -------------------- DISCORD LOGGING ------------------------
 logger = logging.getLogger('discord')
@@ -17,7 +17,7 @@ logger.addHandler(handler)
 # -------------------------------------------------------------
 
 # -------------------- SECRET KEY -----------------------------
-with open(Path('secret_key'), 'r') as f:
+with open(dirname + 'secret_key', 'r') as f:
     SECRET_KEY = f.read()
 # -------------------------------------------------------------
 
@@ -28,7 +28,7 @@ bot.load_extension("cogs.sarcasm")
 # -------------------------------------------------------------
 
 
-@bot.event
+@ bot.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(bot))
 
