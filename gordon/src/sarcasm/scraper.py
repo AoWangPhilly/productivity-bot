@@ -1,6 +1,8 @@
 '''
-
-
+FILE: scraper.py
+AUTHOR: Ao Wang
+DESCRIPTION: Scraped website and called GIPHY API to collect Gordon Ramsay quotes, memes, and gifs
+DATE: 01/23/2021
 '''
 
 from bs4 import BeautifulSoup
@@ -20,13 +22,18 @@ QUOTES_URL = 'https://www.scarymommy.com/gordon-ramsay-memes-quotes/'
 DRIVER_PATH = '/Users/aowang/Desktop/chromedriver'
 # ------------------------------------------------------------------------
 
-# --------------------------- GIPHY KEY ----------------------------
+# --------------------------- GIPHY KEY ----------------------------------
 with open('giphy_key', 'r') as f:
     KEY = f.read()
-# ------------------------------------------------------------------
+# ------------------------------------------------------------------------
 
 
-def scrape_memes():
+def scrape_memes() -> List[str]:
+    '''Scapes G.R. memes
+
+    :returns: the scraped G.R. meme URL's 
+    :rtype: list of strings
+    '''
     # Make requests to page
     meme_page = requests.get(MEME_URL)
     meme_soup = BeautifulSoup(meme_page.content, 'html.parser')
@@ -35,25 +42,41 @@ def scrape_memes():
     img_tags = meme_soup.findAll('img')
     img_url_lst = []
 
+    # Loop throug image tags and gather the data-src attribute
     for meme in img_tags:
         img_url = meme['data-src']
+        # The images are stored in a ramsayy folder
         if 'ramsayy' in img_url:
             img_url_lst.append(img_url)
     return img_url_lst
 
 
 def scrape_quotes():
+    '''Scrapes G.R. quotes using Selenium since the text was dynamic
+
+    :returns: the scraped G.R. quotes
+    :rtype: list of strings
+    '''
+
+    # Headless chrome driver
     options = webdriver.ChromeOptions()
     options.headless = True
     driver = webdriver.Chrome(
         executable_path=DRIVER_PATH, options=options)
     driver.get(QUOTES_URL)
+
+    # Sleep for 1 second to let the page load fully
     sleep(1)
+
+    # Get the HTML code and quit the driver
     quote_soup = BeautifulSoup(driver.page_source, 'html.parser')
     driver.quit()
 
+    # Find all the quotes
     quotes = quote_soup.findAll('p')
     quotes_lst = []
+
+    # Clean up the quotes
     for quote in quotes:
         quote = quote.text
         if re.match('\d.*', quote):
@@ -64,6 +87,11 @@ def scrape_quotes():
 
 
 def call_giphy_gifs():
+    '''Calls the GIPHY API to get G.R. GIFs
+
+    :returns: the scraped G.R. GIFs urls
+    :rtype: list of strings
+    '''
     LIMIT = 20
     # Use giphy SDK to grab amount of Gordon Ramsay gifs
 
@@ -94,9 +122,10 @@ if __name__ == '__main__':
     # save_as_pickle(scrape_memes(), 'Memes')
     # save_as_pickle(call_giphy_gifs(), 'GIFs')
     # save_as_pickle(scrape_quotes(), 'Quotes')
-    meme = join('..', '..', 'db', 'img', 'Memes.pkl')
-    gif = join('..', '..', 'db', 'img', 'GIFs.pkl')
-    quote = join('..', '..', 'db', 'img', 'Quotes.pkl')
+    base_img_path = join('..', '..', 'db', 'img')
+    meme = join(base_img_path, 'Memes.pkl')
+    gif = join(base_img_path, 'GIFs.pkl')
+    quote = join(base_img_path, 'Quotes.pkl')
 
     with open(meme, 'rb') as f:
         meme_lst = pickle.load(f)
