@@ -16,20 +16,18 @@ logger.addHandler(handler)
 # -------------------------------------------------------------
 
 # -------------------- SECRET KEY -----------------------------
-with open('secret_key', 'r') as f:
+with open('gordon/secret_key', 'r') as f:
     SECRET_KEY = f.read()
 # -------------------------------------------------------------
 
 bot = commands.Bot(command_prefix='>')
 
 # ----------------------- ADD COGS ----------------------------
-bot.add_cog(Sarcasm(bot))
+bot.load_extension("cogs.sarcasm")
 # -------------------------------------------------------------
-
 
 @bot.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(bot))
-
 
 bot.run(SECRET_KEY)

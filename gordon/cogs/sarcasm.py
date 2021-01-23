@@ -27,3 +27,6 @@ class Sarcasm(commands.Cog):
     @commands.command()
     async def quote(self, ctx):
         await ctx.send(choice(self._open_pickle('Quotes')))
+
+def setup(bot):
+    bot.add_cog(Sarcasm(bot))
