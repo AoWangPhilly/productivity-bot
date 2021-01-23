@@ -1,6 +1,11 @@
 import discord
 from discord.ext. import commands,tasks
 
+class Timer(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+
 client=commands.Bot(command_prefix='>')
 
 @climent.event
