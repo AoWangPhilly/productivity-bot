@@ -136,6 +136,6 @@ if __name__ == '__main__':
     with open(quote, 'rb') as f:
         quote_lst = pickle.load(f)
 
-    print(meme_lst)
-    print(gif_lst)
-    print(quote_lst)
+    print(choice(meme_lst))
+    print(choice(gif_lst))
+    print(choice(quote_lst))
