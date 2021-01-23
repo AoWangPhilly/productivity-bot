@@ -4,6 +4,7 @@ from cogs.sarcasm import Sarcasm
 
 import logging
 import os
+from pathlib import Path
 
 # -------------------- DISCORD LOGGING ------------------------
 logger = logging.getLogger('discord')
@@ -16,7 +17,7 @@ logger.addHandler(handler)
 # -------------------------------------------------------------
 
 # -------------------- SECRET KEY -----------------------------
-with open('gordon/secret_key', 'r') as f:
+with open(Path('secret_key'), 'r') as f:
     SECRET_KEY = f.read()
 # -------------------------------------------------------------
 
@@ -25,6 +26,7 @@ bot = commands.Bot(command_prefix='>')
 # ----------------------- ADD COGS ----------------------------
 bot.load_extension("cogs.sarcasm")
 # -------------------------------------------------------------
+
 
 @bot.event
 async def on_ready():
