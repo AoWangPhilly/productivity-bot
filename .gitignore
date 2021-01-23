@@ -127,3 +127,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+gordon/src/sarcasm/giphy_key
