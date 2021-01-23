@@ -15,6 +15,7 @@ from os.path import join
 from selenium import webdriver
 from time import sleep
 import re
+from pprint import pprint
 
 # ---------------------------- GLOBAL VARS--------------------------------
 MEME_URL = 'https://www.scoopwhoop.com/humour/gordon-ramsay-memes/'
@@ -128,10 +129,11 @@ if __name__ == '__main__':
     quote = join(base_img_path, 'Quotes.pkl')
 
     with open(meme, 'rb') as a, open(gif, 'rb') as b, open(quote, 'rb') as c:
-        meme_lst = pickle.load(f)
-        gif_lst = pickle.load(f)
-        quote_lst = pickle.load(f)
+        meme_lst = pickle.load(a)
+        gif_lst = pickle.load(b)
+        quote_lst = pickle.load(c)
 
-    print(choice(meme_lst))
-    print(choice(gif_lst))
-    print(choice(quote_lst))
+    pprint(gif_lst)
+    # print(choice(meme_lst))
+    # print(choice(gif_lst))
+    # print(choice(quote_lst))

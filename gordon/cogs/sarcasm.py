@@ -19,7 +19,6 @@ class Sarcasm(commands.Cog):
     async def meme(self, ctx):
         await ctx.send(choice(self._open_pickle('Memes')))
 
-    # TODO: FIX GIF SOMETiMES PRINTS TWO LINKS
     @commands.command()
     async def gif(self, ctx):
         await ctx.send(choice(self._open_pickle('GIFs')))
