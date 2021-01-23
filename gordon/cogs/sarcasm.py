@@ -3,11 +3,6 @@ from discord.ext import commands
 import pickle
 from random import choice
 from os.path import join, dirname
-from pathlib import Path
-
-dirname = dirname(__file__)
-
-print(dirname)
 
 
 class Sarcasm(commands.Cog):

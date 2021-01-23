@@ -1,10 +1,8 @@
 import discord
 from discord.ext import commands
-from cogs.sarcasm import Sarcasm
 
 import logging
 import os
-dirname = os.path.dirname(__file__)
 
 # -------------------- DISCORD LOGGING ------------------------
 logger = logging.getLogger('discord')
