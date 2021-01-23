@@ -1,7 +1,9 @@
-# Joey Huang
-# 1/22/2021
-# Basic Python script using the calendar module that allows the user to scroll
-# back and forth displaying different months. Loops until user enters STOP.
+# Name: Joey Huang
+# Date: 1/22-23/2021
+# File: main.py
+# Description: Basic Python script using the calendar module that allows the 
+# user to scroll back and forth displaying different months. Loops until 
+# user enters STOP.
 
 import calendar
 
