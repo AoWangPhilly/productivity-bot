@@ -19,6 +19,7 @@ class Cal(commands.Cog):
         self.__currYear = 2021
         self.__currCal = calendar.month(self.__currYear,self.__currMonth)
 
+    # Always prints the current calendar, resets
     @commands.command()
     async def cal(self, ctx):
         self.__currMonth = 1
