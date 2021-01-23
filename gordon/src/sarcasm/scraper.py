@@ -10,11 +10,15 @@ import json
 import pickle
 from typing import List
 from os.path import join
+from selenium import webdriver
+from time import sleep
+import re
 
-# ---------------------------- URLS --------------------------------
+# ---------------------------- GLOBAL VARS--------------------------------
 MEME_URL = 'https://www.scoopwhoop.com/humour/gordon-ramsay-memes/'
 QUOTES_URL = 'https://www.scarymommy.com/gordon-ramsay-memes-quotes/'
-# ------------------------------------------------------------------
+DRIVER_PATH = '/Users/aowang/Desktop/chromedriver'
+# ------------------------------------------------------------------------
 
 # --------------------------- GIPHY KEY ----------------------------
 with open('giphy_key', 'r') as f:
@@ -61,7 +65,26 @@ if __name__ == '__main__':
     encoded_gifs = requests.get(
         f'http://api.giphy.com/v1/gifs/search?q=gordon+ramsay&api_key={KEY}&limit={LIMIT}').content
     gifs = json.loads(encoded_gifs.decode('utf8'))
-    gifs_lst = [gif['embed_url']for gif in gifs['data']]
+    gifs_lst = [gif['embed_url'] for gif in gifs['data']]
+
+    options = webdriver.ChromeOptions()
+    options.headless = True
+    driver = webdriver.Chrome(
+        executable_path=DRIVER_PATH, options=options)
+    driver.get(QUOTES_URL)
+    sleep(1)
+    quote_soup = BeautifulSoup(driver.page_source, 'html.parser')
+    driver.quit()
+
+    quotes = quote_soup.findAll('p')
+    quotes_lst = []
+    for quote in quotes:
+        quote = quote.text
+        if re.match('\d.*', quote):
+            quote = quote[4:-1]
+            quote = quote.replace('“', '')
+            quotes_lst.append(quote)
 
     save_as_pickle(img_url_lst, 'Memes')
     save_as_pickle(gifs_lst, 'GIFs')
+    save_as_pickle(quotes_lst, 'Quotes')
