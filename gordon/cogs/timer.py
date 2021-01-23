@@ -12,7 +12,7 @@ client=commands.Bot(command_prefix='>')
 async def timer(ctx, seconds):
 		try:
 		secondint=int(seconds)
-		if secondint>300;
+		if secondint>300:
 		await ctx.send("Cannot go over 5 minutes.")
 		raise BaseException
 		if secondint<=0:

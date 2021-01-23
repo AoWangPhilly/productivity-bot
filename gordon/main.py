@@ -23,6 +23,8 @@ bot = commands.Bot(command_prefix='>')
 
 # ----------------------- ADD COGS ----------------------------
 bot.load_extension("cogs.sarcasm")
+bot.load_extension("cogs.calendar")
+
 # -------------------------------------------------------------
 
 
