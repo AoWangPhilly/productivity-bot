@@ -19,12 +19,18 @@ class Cal(commands.Cog):
         self.__currYear = 2021
         self.__currCal = calendar.month(self.__currYear,self.__currMonth)
 
-    # Always prints the current calendar, resets
+    # Always prints the current calendar, unless specified
     @commands.command()
-    async def cal(self, ctx):
-        self.__currMonth = 1
-        self.__currYear = 2021
-        self.__currCal = calendar.month(self.__currYear,self.__currMonth)
+    async def cal(self, ctx, intYear = None, intMonth = None):
+        if intYear == None and intMonth == None:
+            self.__currMonth = 1
+            self.__currYear = 2021
+            self.__currCal = calendar.month(self.__currYear,self.__currMonth)
+        else:
+            if int(intMonth) > 12 or int(intMonth) < 1:
+                await ctx.send('Invalid month and/or year.')   
+            else:
+                self.__currCal = calendar.month(int(intYear),int(intMonth))
         await ctx.send('```' + self.__currCal + '```')
         
     @commands.command()
