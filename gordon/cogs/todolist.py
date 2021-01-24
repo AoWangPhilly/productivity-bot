@@ -1,4 +1,4 @@
-# Name: Joey Huang
+# Name: Joey Huang & Ao Wang
 # Date: 1/23/2021
 # File: todolist.py
 # Description: Features a to-do list
@@ -8,6 +8,7 @@ import discord
 from discord.ext import commands
 import datetime as dt
 import pickle
+import os
 
 # --------------------------- CONVERTERS --------------------------------
 
@@ -21,7 +22,13 @@ class TodoList(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.__tasks = []
-        self.__date_tasks = {}
+        self.__today = dt.datetime.now()
+        try:
+            with open('db/Tasks.pkl', 'rb') as f:
+                tasks = pickle.load(f)
+                self.__date_tasks = tasks
+        except EOFError:
+            self.__date_tasks = {}
 
     @commands.command()
     async def todo(self, ctx, cmd, *arg):
@@ -68,19 +75,53 @@ class TodoList(commands.Cog):
             self.__date_tasks[date.year][date.month][date.day] = []
 
         task_item = {'task': ' '.join(task),
-                     'deadline': f"{date.strftime('%m/%d/%y')} {deadline}"}
+                     'date': date.strftime('%m/%d/%y'),
+                     'deadline': f'{deadline}'}
 
         self.__date_tasks[date.year][date.month][date.day].append(task_item)
         print(self.__date_tasks)
+        with open('db/Tasks.pkl', 'wb') as f:
+            pickle.dump(self.__date_tasks, f)
+
+    @commands.command()
+    async def complete(self, ctx, date: convert_to_datetime, task_id: lambda x: int(x) - 1):
+        self.__date_tasks[date.year][date.month][date.day][task_id]['task'] = \
+            self.__date_tasks[date.year][date.month][date.day][task_id]['task'] + ' ✅'
+
+    @commands.command()
+    async def delete(self, ctx, date: convert_to_datetime, task_id: lambda x: int(x) - 1):
+        del self.__date_tasks[date.year][date.month][date.day][task_id]
+
+    # CREDIT: https://stackoverflow.com/questions/1060279/iterating-through-a-range-of-dates-in-python
+    def daterange(self, start_date, end_date):
+        for n in range(int((end_date - start_date).days)):
+            yield start_date + dt.timedelta(n)
 
     @commands.command()
     async def show(self, ctx, time):
+        list_msg = ''
         if time == 'today':
-            pass
+            today_tasks = self.__date_tasks[self.__today.year][self.__today.month][self.__today.day]
+            for i, task in enumerate(today_tasks, start=1):
+                list_msg += f"{i}. {task['task']} - DEADLINE: {task['date']} {task['deadline']}\n"
+
+            await ctx.send(f">>> Today's Tasks - {self.__today.strftime('%m/%d/%Y')}\n")
+            await ctx.send(f'```\n{list_msg}```')
+
         elif time == 'week':
-            pass
-        elif time == 'month':
-            pass
+            complete_msg = ''
+            month_tasks = self.__date_tasks[self.__today.year][self.__today.month]
+            start_wk_day = self.__today - \
+                dt.timedelta(days=self.__today.weekday())
+            end_wk_day = start_wk_day + dt.timedelta(days=7)
+            for single_date in self.daterange(start_wk_day, end_wk_day):
+                list_msg = ''
+                if single_date.day in month_tasks:
+                    for i, task in enumerate(month_tasks[single_date.day], start=1):
+                        list_msg += f"{i}. {task['task']} - DEADLINE: {task['date']} {task['deadline']}\n"
+                    if list_msg:
+                        complete_msg += f"```Weekly's Tasks - {single_date.strftime('%m/%d/%Y')}\n{list_msg}```"
+            await ctx.send(complete_msg)
 
 
 def setup(bot):
