@@ -47,6 +47,5 @@ class TodoList(commands.Cog):
         else:
             await ctx.send('Invalid command.')
 
-
 def setup(bot):
     bot.add_cog(TodoList(bot))
