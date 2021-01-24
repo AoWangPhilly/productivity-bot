@@ -1,7 +1,7 @@
-# GORDON Bot
+# Gordon Bot
 ## BoilerMake VII Hackathon Project
 
-GORDON is a Discord bot that encourages productivity through features such as to-do lists, calendars, and also fun commands featuring the one and only Gordon Ramsay.  So if you ever need some encouragement during this time, maybe you need GORDON in your life!
+Gordon is a Discord bot that encourages productivity through features such as to-do lists, calendars, and also fun commands featuring the one and only Gordon Ramsay. So if you ever need some encouragement during this time, maybe you need Gordon in your life!
 
 ### Key Features
 * To-do lists
