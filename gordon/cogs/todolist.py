@@ -7,8 +7,7 @@
 import discord
 from discord.ext import commands
 
-
-class todoList(commands.Cog):
+class TodoList(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.__tasks = []
@@ -28,7 +27,7 @@ class todoList(commands.Cog):
             for i, task in enumerate(self.__tasks, start=1):
                 todo_list_msg += f'{i}. {task}\n'
             await ctx.send('>>> To-Do List\n')
-            await ctx.send(f'```To-Do List \n{todo_list_msg}```')
+            await ctx.send(f'```\n{todo_list_msg}```')
 
         # >todo remove <task number>
         # Removes item from list
@@ -38,10 +37,16 @@ class todoList(commands.Cog):
                 task = self.__tasks.pop(target_idx)
                 await ctx.send(f'Removed task: {task}!\nGood work idiot sandwich!')
 
+        #>clear 
+        # Clears the list
+        elif comm == "clear":
+           self.__tasks = []   
+           await ctx.send('List cleared!')
+                
         # Invalid command if anything else is entered
         else:
             await ctx.send('Invalid command.')
 
 
 def setup(bot):
-    bot.add_cog(todoList(bot))
+    bot.add_cog(TodoList(bot))
