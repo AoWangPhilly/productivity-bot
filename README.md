@@ -30,6 +30,9 @@ Gordon is a Discord bot that encourages productivity through features such as to
   * meme
   * quote
 * Help
+ 
+ ### Setting Up
+Interested in setting up the bot for yourself? Clone this repository and then run the main script and then the cogs! Also remember the secret key! Make sure you give the bot permissions as well!
 
 ### Languages and Tools
 * Python
@@ -41,5 +44,4 @@ Gordon is a Discord bot that encourages productivity through features such as to
 
 ### Developers
 * Joey Huang - joey.huang@drexel.edu
-* Lynne Kim
 * Ao Wang - aw3338@drexel.edu
