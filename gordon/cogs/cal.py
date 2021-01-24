@@ -13,9 +13,9 @@ class Cal(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self._last_member = None
-        self.__currMonth = dt.datetime.now().month
-        self.__currYear = dt.datetime.now().year
+        self.__currentDate = dt.datetime.now()
+        self.__currMonth = self.__currentDate.month
+        self.__currYear = self.__currentDate.year
         self.__currCal = calendar.month(self.__currYear, self.__currMonth)
 
     # >cal <opt. year> <opt. month>
@@ -23,8 +23,8 @@ class Cal(commands.Cog):
     @commands.command()
     async def cal(self, ctx, intYear: int = None, intMonth: int = None):
         if intYear == None and intMonth == None:
-            self.__currMonth = dt.datetime.now().month
-            self.__currYear = dt.datetime.now().year
+            self.__currMonth = self.__currentDate.month
+            self.__currYear = self.__currentDate.year
             self.__currCal = calendar.month(self.__currYear, self.__currMonth)
         else:
             if intMonth > 12 or intMonth < 1:
