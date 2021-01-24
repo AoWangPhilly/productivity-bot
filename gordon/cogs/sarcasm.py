@@ -1,3 +1,10 @@
+'''
+FILE: sarcasm.py
+DESCRIPTION: Sarcasm cog of the productivity bot
+DATE: 01/23/2021
+AUTHOR: Ao Wang
+'''
+
 import discord
 from discord.ext import commands
 import pickle
@@ -15,15 +22,15 @@ class Sarcasm(commands.Cog):
             pickle_lst = pickle.load(f)
         return pickle_lst
 
-    @ commands.command()
+    @ commands.command(help='Outputs random Gordon Ramsay meme')
     async def meme(self, ctx):
         await ctx.send(choice(self._open_pickle('Memes')))
 
-    @ commands.command()
+    @ commands.command(help='Outputs random Gordon Ramsay GIF')
     async def gif(self, ctx):
         await ctx.send(choice(self._open_pickle('GIFs')))
 
-    @ commands.command()
+    @ commands.command(help='Outputs random Gordon Ramsay quote')
     async def quote(self, ctx):
         await ctx.send(choice(self._open_pickle('Quotes')))
 
