@@ -104,7 +104,7 @@ class TodoList(commands.Cog):
             yield start_date + dt.timedelta(n)
 
     @commands.command(help='Display all tasks from daily to weekly.')
-    async def show(self, ctx, time):
+    async def display(self, ctx, time):
         list_msg = ''
         if time == 'today':
             # Grab list of today's tasks
