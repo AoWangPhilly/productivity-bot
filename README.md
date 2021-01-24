@@ -10,13 +10,18 @@ Gordon is a Discord bot that encourages productivity through features such as to
 
 ### Commands
 * Calendar
-  * cal
+  * cal <opt. year> <opt. month>
   * next
   * back
 * To-Do List - these commands have a todo prefix
-  * add
-  * remove
-  * show  
+  * add <task>
+  * remove <task>
+  * show 
+  * clear
+* Media
+  * gif
+  * meme
+  * quote
 * Help
 
 ### Languages and Tools
