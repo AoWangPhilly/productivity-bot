@@ -23,8 +23,8 @@ class Cal(commands.Cog):
     @commands.command()
     async def cal(self, ctx, intYear: int = None, intMonth: int = None):
         if intYear == None and intMonth == None:
-            self.__currMonth = 1
-            self.__currYear = 2021
+            self.__currMonth = dt.datetime.now().month
+            self.__currYear = dt.datetime.now().year
             self.__currCal = calendar.month(self.__currYear, self.__currMonth)
         else:
             if intMonth > 12 or intMonth < 1:
