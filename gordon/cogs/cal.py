@@ -20,7 +20,7 @@ class Cal(commands.Cog):
 
     # >cal <opt. year> <opt. month>
     # Prints the current calendar, unless specified
-    @commands.command()
+    @commands.command(help='Displays calendar based on month and year (defaults to current date).')
     async def cal(self, ctx, intYear: int = None, intMonth: int = None):
         if intYear == None and intMonth == None:
             self.__currMonth = self.__currentDate.month
@@ -35,7 +35,7 @@ class Cal(commands.Cog):
 
     # >next
     # Prints next month
-    @commands.command()
+    @commands.command(help='Goes to the next month from current.')
     async def next(self, ctx):
         if self.__currMonth == 12:
             self.__currMonth = 1
@@ -47,7 +47,7 @@ class Cal(commands.Cog):
 
     # >back -
     # Prints previous month
-    @commands.command()
+    @commands.command(help='Goes to previous month from current.')
     async def back(self, ctx):
         if self.__currMonth == 1:
             self.__currMonth = 12
