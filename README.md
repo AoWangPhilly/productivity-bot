@@ -8,6 +8,21 @@ GORDON is a Discord bot that encourages productivity through features such as to
 * Scrolling calendar
 * Gordon Ramsay GIFs, memes, and quotes!
 
+### Commands
+* Calendar
+  * cal
+  * next
+  * back
+* To-Do List - these commands have a todo prefix
+  * add
+  * remove
+  * show  
+* Help
+
+### Languages and Tools
+* Python
+* [Discord.py](https://github.com/Rapptz/discord.py)
+
 ### Developers
 * Joey Huang - joey.huang@drexel.edu
 * Lynne Kim
